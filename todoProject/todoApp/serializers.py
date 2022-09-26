@@ -1,18 +1,18 @@
 from rest_framework import serializers
 
-from .models import Todo
+from .models import TodoModel
 
 class TodoSerializer(serializers.ModelSerializer):
     children = serializers.PrimaryKeyRelatedField(
         many=True,
-        queryset=Todo.objects.all(),
+        queryset=TodoModel.objects.all(),
         required=False
     )
     parent = serializers.PrimaryKeyRelatedField(
-        queryset=Todo.objects.all(),
+        queryset=TodoModel.objects.all(),
         required=False
     )
 
     class Meta:
-        model = Todo
+        model = TodoModel
         fields = ['id', 'name', 'is_complete', 'children', 'parent']

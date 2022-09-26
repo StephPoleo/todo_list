@@ -41,6 +41,9 @@ INSTALLED_APPS = [
 
     #Apps
     'todoApp',
+
+    #Third party_apps
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

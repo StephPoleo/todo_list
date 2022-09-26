@@ -18,4 +18,9 @@ class TodoModel(models.Model):
         db_table = "todo"
 
     def __str__(self):
-        return "{} - (Is Complete: {}) [{}]".format(self.name, self.is_complete, self.id)
+        if(self.parent_id == None):
+            parent = 'Ninguno'
+        else:
+            parent = self.parent_id
+            
+        return "{} - {} - (Is Complete: {}) [{}]".format(self.id, self.name, self.is_complete, parent)
