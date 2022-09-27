@@ -16,6 +16,7 @@ def todoView(request):
 
 
 def addTodoView(request):
+    form = TodoForm
     if request.method == "POST":
         form = TodoForm(request.POST)
         if form.is_valid():
@@ -39,3 +40,8 @@ def updateTodo(request, id):
         'form':form
     }
     return render(request, "update_todo.html", context)
+
+def deleteTodo(request, id):
+    queryset = TodoModel.objects.get(pk=id)
+    queryset.delete()
+    return redirect('home')

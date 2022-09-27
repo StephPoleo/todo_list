@@ -6,6 +6,7 @@
         <li>
             {{ object }}
             <a href="{% url 'update_todo' object.id %}"> Edit </a>
+            <a href="{% url 'delete_todo' object.id %}"> Delete </a>
         </li>
     {% empty %}
     <h4>You have no lists!</h4>
