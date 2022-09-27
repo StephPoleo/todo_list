@@ -21,23 +21,34 @@ installdeps:
 	${bin_path}/pip3 install -r requirements.txt
 	${bin_path}/pip3 install -r requirements_dev.txt
 
-createmigrations:
-	${bin_path}/python3 manage.py makemigrations
+domigrations:
+	$ py manage.py makemigrations
 
-install: installdeps createmigrations
+install: installdeps domigrations
 
 migrate:
-	${bin_path} && py manage.py migrate
+	$ py manage.py migrate
+
+show:
+	$ python manage.py showmigrations
 
 revert:
 	$ py manage.py migrate admin zero
 	$ py manage.py migrate auth zero
 	$ py manage.py migrate contenttypes zero
 	$ py manage.py migrate sessions zero
-	$ py manage.py migrate todo zero
+	$ py manage.py migrate todoApp zero
+
+drop:
+	$ py manage.py flush
+
+delete_all: drop revert
+
+seed:
+	$ py manage.py seed todoApp --number=6
 
 dev:
-	${bin_path}/python3 manage.py runserver
+	$ py manage.py runserver
 
 run:
 	# the default settings file is development, it can be changed

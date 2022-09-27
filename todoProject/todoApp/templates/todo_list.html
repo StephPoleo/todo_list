@@ -5,6 +5,7 @@
     {%for object in object_list %}
         <li>
             {{ object }}
+            {{ object.print_tree }}
             <a href="{% url 'update_todo' object.id %}"> Edit </a>
             <a href="{% url 'delete_todo' object.id %}"> Delete </a>
         </li>
