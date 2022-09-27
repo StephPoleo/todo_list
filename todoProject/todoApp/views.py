@@ -1,33 +1,41 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.http import HttpResponseRedirect
 
 from .models import TodoModel
-from .serializers import TodoSerializer
 from .forms import TodoForm
 
 # Create your views here.
 def todoView(request):
-    submitted = False
+    queryset = TodoModel.objects.all()
+    context = {
+        'object_list':queryset
+    }
+
+    return render(request, "todo_list.html", context)
+
+
+def addTodoView(request):
     if request.method == "POST":
         form = TodoForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/?submitted=True')
-    else:
-        queryset = TodoModel.objects.all()
-        form  = TodoForm
-        if 'submitted' in request.GET:
-            summitted = True
+            return redirect('home')
 
     context = {
-        'object_list':queryset,
         'form': form,
-        'submitted': submitted
     }
 
-    return render(request, "index.html", context)
+    return render(request, "new_todo.html", context)
 
-
-def addTodoView(request):
-    print('Nada')
+def updateTodo(request, id):
+    queryset = TodoModel.objects.get(pk=id)
+    form = TodoForm(request.POST or None, instance=queryset)
+    if form.is_valid():
+        form.save()
+        return redirect('home')
+    context = {
+        'todo':queryset,
+        'form':form
+    }
+    return render(request, "update_todo.html", context)

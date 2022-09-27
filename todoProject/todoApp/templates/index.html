@@ -1,22 +1,7 @@
 <h1>This is a To Do list</h1>
 
-<ul>
-    {%for object in object_list %}
-        <li>{{ object }}</li>
-    {% empty %}
-    <h4>You have no lists!</h4>
-    {% endfor %}
-</ul>
+{% block list_content %}
+    List content should be here.
+{% endblock %}
 
-{% if submitted %}
-    Task added to To Do List!
 
-{% else %}
-<p>Add task</p>
-<form action="" method=POST>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
-
-{% endif %}
