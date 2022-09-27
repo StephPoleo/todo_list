@@ -3,4 +3,5 @@ from .views import *
 
 urlpatterns = [
     path('', todoView),
+    path('addTodoItem/',addTodoView), 
 ]

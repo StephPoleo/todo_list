@@ -22,5 +22,13 @@ class TodoModel(models.Model):
             parent = 'Ninguno'
         else:
             parent = self.parent_id
-            
+
         return "{} - {} - (Is Complete: {}) [{}]".format(self.id, self.name, self.is_complete, parent)
+
+    def print_tree(self):
+        stack = [(self, 1)]
+        while stack:
+            current, depth = stack.pop()
+            print("*" * depth, current)
+            for child in current.children.all():
+                stack.append((child, depth + 1))
