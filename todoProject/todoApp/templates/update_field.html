@@ -1,0 +1,11 @@
+<h2>Your task is about to be modifided to...</h2>
+<form action="" method=POST>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <h3>Are you sure?</h3>
+    <input type="submit" value="Continue">
+</form>
+<form action="/">
+    {% csrf_token %}
+    <input type="submit" value="Cancel">
+</form>

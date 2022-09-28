@@ -7,7 +7,6 @@ register = template.Library()
 
 @register.filter(name='upper')
 def upper(value):
-  print(value)
   query = TodoModel.objects.all()
   num = []
   for q in query:
@@ -18,5 +17,7 @@ def upper(value):
 def recursive(value):
     query = TodoModel.objects.filter(pk__in=value)
     data = TodoSerializer(query, many = True).data
-    print(data)
+
+    #Implementar por
+
     return {'users': data}

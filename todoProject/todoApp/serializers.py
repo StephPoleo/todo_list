@@ -13,6 +13,19 @@ class TodoSerializer(serializers.ModelSerializer):
         required=False
     )
 
+    is_complete = serializers.SerializerMethodField('_get_complete')
+
+    def _get_complete(self, obj):
+            if obj.is_complete == None:
+                return False
+
+            elif obj.is_complete == False:
+                return False
+
+            else:
+                return True
+
     class Meta:
+
         model = TodoModel
         fields = ['id', 'name', 'is_complete', 'children', 'parent']

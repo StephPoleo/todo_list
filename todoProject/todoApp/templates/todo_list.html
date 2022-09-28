@@ -7,7 +7,8 @@
         {% if object.children %}
 
             <li>
-                {{ object.id }} - {{ object.name }} [{{object.is_complete}}] 
+                {{ object.name }}
+                (is Complete:  <a href="{% url 'update_field' object.id %}">{{object.is_complete}}</a>) --
                 <a href="{% url 'update_todo' object.id %}"> Edit </a>
                 <a href="{% url 'delete_todo' object.id %}"> Delete </a>
             </li>
@@ -16,7 +17,8 @@
 
         {% else %}
             <li>
-                {{ object.id }} - {{ object.name }} [{{object.is_complete}}]
+                {{ object.name }}
+                (is Complete:  <a href="{% url 'update_field' object.id %}">{{object.is_complete}}</a>) --
                 <a href="{% url 'update_todo' object.id %}"> Edit </a>
                 <a href="{% url 'delete_todo' object.id %}"> Delete </a>
             </li>
