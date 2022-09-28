@@ -1,21 +1,28 @@
-{% extends "index.html" %}
-
-{% block list_content %}
+{% load custom_tags %}
 <ul>
     {%for object in object_list %}
-        <li>
-            {{ object }}
-            {{ object.print_tree }}
-            <a href="{% url 'update_todo' object.id %}"> Edit </a>
-            <a href="{% url 'delete_todo' object.id %}"> Delete </a>
-        </li>
+
+    <!-- {{object.id|upper}} -->
+
+        {% if object.children %}
+
+            <li>
+                {{ object.id }} - {{ object.name }} [{{object.is_complete}}] 
+                <a href="{% url 'update_todo' object.id %}"> Edit </a>
+                <a href="{% url 'delete_todo' object.id %}"> Delete </a>
+            </li>
+
+            {% recursive object.children %}
+
+        {% else %}
+            <li>
+                {{ object.id }} - {{ object.name }} [{{object.is_complete}}]
+                <a href="{% url 'update_todo' object.id %}"> Edit </a>
+                <a href="{% url 'delete_todo' object.id %}"> Delete </a>
+            </li>
+        {% endif %}
+
     {% empty %}
-    <h4>You have no lists!</h4>
+        <h4>You have no lists!</h4>
     {% endfor %}
 </ul>
-<form action="/addTodoItem/">
-    {% csrf_token %}
-    <input type="submit" value="Add task">
-</form>
-{% endblock %}
-

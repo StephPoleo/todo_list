@@ -2,17 +2,21 @@ from django.shortcuts import render, redirect
 
 from django.http import HttpResponseRedirect
 
+from .serializers import TodoSerializer
+
 from .models import TodoModel
 from .forms import TodoForm
 
 # Create your views here.
 def todoView(request):
     queryset = TodoModel.objects.all()
+    data = TodoSerializer(queryset, many = True).data
     context = {
-        'object_list':queryset
+        'object_list':data,
+        'query': queryset
     }
 
-    return render(request, "todo_list.html", context)
+    return render(request, "index.html", context)
 
 
 def addTodoView(request):

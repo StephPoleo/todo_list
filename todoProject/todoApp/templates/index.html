@@ -1,7 +1,8 @@
 <h1>This is a To Do list</h1>
 
-{% block list_content %}
-    List content should be here.
-{% endblock %}
+{% include "todo_list.html" %}
 
-
+<form action="/addTodoItem/">
+    {% csrf_token %}
+    <input type="submit" value="Add task">
+</form>

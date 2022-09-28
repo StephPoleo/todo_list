@@ -32,3 +32,5 @@ class TodoModel(models.Model):
             print("*" * depth, current)
             for child in current.children.all():
                 stack.append((child, depth + 1))
+
+        return stack
