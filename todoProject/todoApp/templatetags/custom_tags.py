@@ -15,9 +15,18 @@ def upper(value):
 
 @register.inclusion_tag('prueba.html')
 def recursive(value):
-    query = TodoModel.objects.filter(pk__in=value)
-    data = TodoSerializer(query, many = True).data
 
-    #Implementar por
+  query = TodoModel.objects.filter(pk__in=value)
+  data = TodoSerializer(query, many = True).data
 
-    return {'users': data}
+  """ lista = []
+  print("VALOR: ", value)
+  for id in value:
+    query = TodoModel.objects.get(pk=id)
+    lista.append(query)
+    print(query)
+
+  data = TodoSerializer(lista, many = True).data
+  print("Data2: ", data) """
+
+  return {'users': data}
